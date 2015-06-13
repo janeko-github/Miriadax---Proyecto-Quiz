@@ -11,3 +11,8 @@ exports.answer = function(req,res) {
     res.render('quizes/answer',{title:titulo,respuesta: 'Incorrecto'});
   }
 };
+
+
+exports.author = function(req,res) {
+  res.render('quizes/author',{title:titulo,author: 'Pedro Alarcón Sánchez'});
+};
