@@ -40,7 +40,7 @@ sequelize.sync().then(function() {
 				pregunta: 'Capital de Italia',
 				respuesta: 'Roma'
 			})
-			.success(function(){console.log('Base de datos inicializada')});
+			.then(function(){console.log('Base de datos inicializada')});
 		};
 	});
 });
