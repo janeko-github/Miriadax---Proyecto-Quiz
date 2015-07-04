@@ -3,7 +3,7 @@ var models = require('../models/models.js');
 var titulo = 'Quiz';
 
 exports.question = function(req,res) {
-	models.Quiz.findAll().success(function(quiz) {
+	models.Quiz.findAll().then(function(quiz) {
   		res.render('quizes/question',{title:titulo,pregunta: quiz[0].pregunta});		
 	})
 
@@ -12,7 +12,7 @@ exports.question = function(req,res) {
 
 
 exports.answer = function(req,res) {
-	models.Quiz.findAll().success(function(quiz) {
+	models.Quiz.findAll().then(function(quiz) {
 	  if(req.query.respuesta === quiz[0].respuesta) {
 	    res.render('quizes/answer',{title:titulo,respuesta: 'Correcto'});
 	  }else {
