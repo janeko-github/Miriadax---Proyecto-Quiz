@@ -1,0 +1,5 @@
+node_modules
+arranque*
+quiz.sqlite
+npm-debug.log
+.env
