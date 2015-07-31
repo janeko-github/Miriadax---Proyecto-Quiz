@@ -4,19 +4,48 @@ var titulo = 'Quiz';
 
 exports.question = function(req,res) {
 	models.Quiz.findAll().then(function(quiz) {
-  		res.render('quizes/question',{title:titulo,pregunta: quiz[0].pregunta});		
+  		res.render('quizes/show',{title:titulo,pregunta: quiz[0].pregunta});		
+	})
+
+};
+
+exports.load = function(req,res, next, quizId) {
+	models.Quiz.find(quizId).then(
+		function(quiz) {
+			if (quiz) {
+				req.quiz = quiz;
+				next();
+			}else
+			{
+				next(new Error('No existe quizId=' + quizId));
+			}
+
+    	}
+	).catch(function(error) {next(error);});
+
+};
+
+exports.index = function(req,res) {
+	models.Quiz.findAll().then(function(quizes) {
+	    res.render('quizes/index.ejs',{quizes: quizes});
+	}).catch(function(error) {next(error);});
+
+};
+
+exports.show = function(req,res) {
+	models.Quiz.findAll(req.params.quizId).then(function(quiz) {
+	    res.render('quizes/show',{quiz: quiz});
 	})
 
 };
 
 
-
 exports.answer = function(req,res) {
-	models.Quiz.findAll().then(function(quiz) {
-	  if(req.query.respuesta === quiz[0].respuesta) {
-	    res.render('quizes/answer',{title:titulo,respuesta: 'Correcto'});
+	models.Quiz.findAll(req.params.quizId).then(function(quiz) {
+	  if(req.query.respuesta === quiz.respuesta) {
+	    res.render('quizes/answer',{quiz: quiz,respuesta: 'Correcto'});
 	  }else {
-	    res.render('quizes/answer',{title:titulo,respuesta: 'Incorrecto'});
+	    res.render('quizes/answer',{quiz: quiz,respuesta: 'Incorrecto'});
 	  }		
 	})
 
