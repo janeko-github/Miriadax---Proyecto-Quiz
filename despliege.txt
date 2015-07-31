@@ -1,0 +1,15 @@
+git commit -a -m “Primera pregunta”
+
+git push heroku master
+
+heroku open
+
+
+Versiones
+git log --oneline
+
+añadir a la última versión
+git commit --amend -m “Primera pregunta”
+
+ver cambios
+git status
