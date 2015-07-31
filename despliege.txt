@@ -1,7 +1,9 @@
 git commit -a -m “Primera pregunta”
 
+Enviar a heroku
 git push heroku master
-
+Enviar a github
+git push origin master
 heroku open
 
 
