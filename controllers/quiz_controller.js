@@ -27,32 +27,28 @@ exports.load = function(req,res, next, quizId) {
 
 exports.index = function(req,res) {
 	models.Quiz.findAll().then(function(quizes) {
-	    res.render('quizes/index.ejs',{quizes: quizes});
+	    res.render('quizes/index',{quizes: quizes});
 	}).catch(function(error) {next(error);});
 
 };
 
 exports.show = function(req,res) {
-	models.Quiz.findAll(req.params.quizId).then(function(quiz) {
-	    res.render('quizes/show',{quiz: req.quiz});
-	})
-
+    res.render('quizes/show',{quiz: req.quiz});
 };
 
 
 exports.answer = function(req,res) {
-	models.Quiz.findAll(req.params.quizId).then(function(quiz) {
-		var resultado = 'Incorrecto';
+	var resultado = 'Incorrecto';
 	  if(req.query.respuesta === req.quiz.respuesta) {
 	    resultado = 'Correcto';
 	  }
-	    res.render('quizes/answer',{quiz: req.quiz,respuesta: resultado});
-	  		
-	})
+    res.render('quizes/answer',{quiz: req.quiz,respuesta: resultado});
+ 		
 
 };
 
-
+/*
 exports.author = function(req,res) {
   res.render('quizes/author',{title:titulo,author: 'Pedro Alarcón Sánchez'});
 };
+*/
